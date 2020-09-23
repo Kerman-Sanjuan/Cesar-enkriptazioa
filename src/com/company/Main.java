@@ -154,7 +154,7 @@ public class Main {
             }
         }
         System.out.println(emaitza);
-        System.out.println("Kriptograma dekodetua modu egokian!!");
+        System.out.println("Kriptograma deskodetua modu egokian!!");
         return emaitza.toString();
     }
 }
