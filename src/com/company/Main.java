@@ -15,12 +15,22 @@ public class Main {
                 int aukera = sc.nextInt();
                 switch (aukera) {
                     case 1:
-                        kodetu();
+                        Scanner sca = new Scanner(System.in);
+                        System.out.println("Lehenengoz, gakoa idatzi");
+                        String gakoa = sca.nextLine();
+                        System.out.println("Horain, kodetu nahi duzun esaldia idatzi");
+                        String esaldia = sca.nextLine();
+                        kodetu(gakoa,esaldia);
                         eginda = true;
                         break;
 
                     case 2:
-                        dekodetu();
+                        Scanner sc2 = new Scanner(System.in);
+                        System.out.println("Gakoa idatzi");
+                        String gakoa2 = sc2.nextLine();
+                        System.out.println("Kriptograma idatzi");
+                        String kriptograma = sc2.nextLine();
+                        dekodetu(gakoa2,kriptograma);
                         eginda = true;
                         break;
                     default:
@@ -34,18 +44,12 @@ public class Main {
 
         //----------------------------- KODETU METODOAK  ETA BEHAR DITUEN AZPIPROGRAMAK------------------------------
     }
-    private static void kodetu(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Lehenengoz, gakoa idatzi ezazu AVISO, ESTAMOS USANDO" +
-                " LA ADAPTACIÓN DE JUANAN, ASIQUE USAR LA KEY QUE EL NOS DA: ZXCVBNMASDFGHJKLQWERTYUIOP ");
-        String gakoa = sc.nextLine();
+    public static String kodetu(String gakoa, String esaldia){
         gakoa = gakoa.replaceAll("\\s",""); //Quitamos espacios por si la gakoa es una frase.
         gakoa = gakoa.toUpperCase(); //Por si nos ponen la gakoa en minusculas.
         HashMap<Character,Integer> alfabetoa = sortuAlfabetoa();
         HashMap<Integer,Character> cesar = lortuAlfabetoa(gakoa);
         //Orain aldatuko  dugu gure esaldia
-        System.out.println("Horain, kodetu nahi duzun esaldia idatzi");
-        String esaldia = sc.nextLine();
         //Esaldia igaroko dugu eta kodeketa sortuko dugu.
         char aux;
         int ans;
@@ -68,6 +72,7 @@ public class Main {
         System.out.println(kodeketa);
         System.out.println("Kodetu duzu!");
         assert kodeketa != null;
+        return kodeketa.toString();
     }
 
 
@@ -121,12 +126,8 @@ public class Main {
 
 
     //----------------------- DEKODETU ETA BEHAR DITUEN AZPIPROGRAMAK-----------------------------------------
-    private static void dekodetu(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Gakoa idatzi");
-        String gakoa = sc.nextLine();
-        System.out.println("Kriptograma idatzi");
-        String kriptograma = sc.nextLine();
+    public static String dekodetu(String gakoa, String kriptograma){
+
         //Arazoak daudenez hashmap-aren datu egiturarekin, arrayList era bihurtuko ditugu bi listak.
         //Guk lortutako hiztegiaren deskonposaketa
         Collection<Character> values = lortuAlfabetoa(gakoa).values();
@@ -154,5 +155,6 @@ public class Main {
         }
         System.out.println(emaitza);
         System.out.println("Kriptograma dekodetua modu egokian!!");
+        return emaitza.toString();
     }
 }

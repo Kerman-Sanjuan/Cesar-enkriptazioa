@@ -23,6 +23,6 @@ public class MainTest extends TestCase {
 
     public void testDeszifratu() {
 
-        assertEquals("EZ GAUDE GERRAREN ALDE", Main.dekodetu(Main.kodetu("ZXCVBNMASDFGHJKLQWERTYUIOP","EZ GAUDE GERRAREN ALDE"),"ZXCVBNMASDFGHJKLQWERTYUIOP"));
+        assertEquals("EZ GAUDE GERRAREN ALDE", Main.dekodetu("ZXCVBNMASDFGHJKLQWERTYUIOP","BP MZTVB MBWWZWBJ ZGVB"));
     }
 }
