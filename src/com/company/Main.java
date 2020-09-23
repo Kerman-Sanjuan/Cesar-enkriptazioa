@@ -44,21 +44,13 @@ public class Main {
         //----------------------------- KODETU METODOAK  ETA BEHAR DITUEN AZPIPROGRAMAK------------------------------
     }
     public static String kodetu(String gakoa, String esaldia){
-
-        System.out.println("Lehenengoz, gakoa idatzi ezazu AVISO, ESTAMOS USANDO" +
-                " LA ADAPTACIÓN DE JUANAN, ASIQUE USAR LA KEY QUE EL NOS DA: ZXCVBNMASDFGHJKLQWERTYUIOP ");
-
         gakoa = gakoa.replaceAll("\\s",""); //Quitamos espacios por si la gakoa es una frase.
         gakoa = gakoa.toUpperCase(); //Por si nos ponen la gakoa en minusculas.
         HashMap<Character,Integer> alfabetoa = sortuAlfabetoa();
         HashMap<Integer,Character> cesar = lortuAlfabetoa(gakoa);
-        //Orain aldatuko  dugu gure esaldia
-
-        //Esaldia igaroko dugu eta kodeketa sortuko dugu.
         char aux;
         int ans;
         String kodeketa = null;
-
         for (int i = 0; i < esaldia.length(); i++) {
             aux = esaldia.charAt(i);
             if (Character.isWhitespace(aux)) {
@@ -77,8 +69,6 @@ public class Main {
         assert kodeketa != null;
         return kodeketa;
     }
-
-
 
     private static HashMap<Character,Integer> sortuAlfabetoa(){
         //Crea el diccionario normal y corriente.
@@ -121,9 +111,6 @@ public class Main {
         }
         return abc;
     }
-
-
-
 
 
 
