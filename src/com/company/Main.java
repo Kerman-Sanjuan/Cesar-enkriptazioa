@@ -15,12 +15,21 @@ public class Main {
                 int aukera = sc.nextInt();
                 switch (aukera) {
                     case 1:
-                        kodetu();
+                        Scanner sc1 = new Scanner(System.in);
+                        String gakoa = sc1.nextLine();
+                        System.out.println("Horain, kodetu nahi duzun esaldia idatzi");
+                        String esaldia = sc1.nextLine();
+                        kodetu(gakoa,esaldia);
                         eginda = true;
                         break;
 
                     case 2:
-                        dekodetu();
+                        Scanner sc2 = new Scanner(System.in);
+                        System.out.println("Gakoa idatzi");
+                        String gakoa2 = sc2.nextLine();
+                        System.out.println("Kriptograma idatzi");
+                        String kriptograma = sc2.nextLine();
+                        dekodetu(kriptograma,gakoa2);
                         eginda = true;
                         break;
                     default:
@@ -34,39 +43,39 @@ public class Main {
 
         //----------------------------- KODETU METODOAK  ETA BEHAR DITUEN AZPIPROGRAMAK------------------------------
     }
-    private static void kodetu(){
-        Scanner sc = new Scanner(System.in);
+    public static String kodetu(String gakoa, String esaldia){
+
         System.out.println("Lehenengoz, gakoa idatzi ezazu AVISO, ESTAMOS USANDO" +
                 " LA ADAPTACIÓN DE JUANAN, ASIQUE USAR LA KEY QUE EL NOS DA: ZXCVBNMASDFGHJKLQWERTYUIOP ");
-        String gakoa = sc.nextLine();
+
         gakoa = gakoa.replaceAll("\\s",""); //Quitamos espacios por si la gakoa es una frase.
         gakoa = gakoa.toUpperCase(); //Por si nos ponen la gakoa en minusculas.
         HashMap<Character,Integer> alfabetoa = sortuAlfabetoa();
         HashMap<Integer,Character> cesar = lortuAlfabetoa(gakoa);
         //Orain aldatuko  dugu gure esaldia
-        System.out.println("Horain, kodetu nahi duzun esaldia idatzi");
-        String esaldia = sc.nextLine();
+
         //Esaldia igaroko dugu eta kodeketa sortuko dugu.
         char aux;
         int ans;
-        StringBuilder kodeketa = null;
+        String kodeketa = null;
 
         for (int i = 0; i < esaldia.length(); i++) {
             aux = esaldia.charAt(i);
             if (Character.isWhitespace(aux)) {
                 assert kodeketa != null;
-                kodeketa.append(" ");
+                kodeketa = kodeketa + " ";
             } else {
                 ans = alfabetoa.get(aux);
                 if (i == 0) {
-                    kodeketa = new StringBuilder(cesar.get(ans).toString());
+                    kodeketa = cesar.get(ans).toString();
                 } else {
-                    kodeketa.append(cesar.get(ans));
+                    kodeketa = kodeketa+ cesar.get(ans);
                 }
             }
         }
         System.out.println("Kodetu duzu!");
         assert kodeketa != null;
+        return kodeketa;
     }
 
 
@@ -83,7 +92,7 @@ public class Main {
 
 
 
-    private static HashMap<Integer,Character> lortuAlfabetoa(String gakoa){
+    public static HashMap<Integer,Character> lortuAlfabetoa(String gakoa){
         //Por ahora va a devolver un diccionario aleatorio, sin relación con la key. Hay que encontrar una forma de descodificar.
         HashMap<Integer,Character> abc = new HashMap<>();
         //Algoritmo para generar el diccionario en función de la key
@@ -120,36 +129,33 @@ public class Main {
 
 
     //----------------------- DEKODETU ETA BEHAR DITUEN AZPIPROGRAMAK-----------------------------------------
-    private static void dekodetu(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Gakoa idatzi");
-        String gakoa = sc.nextLine();
-        System.out.println("Kriptograma idatzi");
-        String kriptograma = sc.nextLine();
+    public static String dekodetu(String kriptograma, String gakoa){
+
         //Arazoak daudenez hashmap-aren datu egiturarekin, arrayList era bihurtuko ditugu bi listak.
         //Guk lortutako hiztegiaren deskonposaketa
         Collection<Character> values = lortuAlfabetoa(gakoa).values();
         ArrayList<Character> kodeta = new ArrayList<>(values);
         //Hiztegi normalaren deskonposaketa
         ArrayList<Character> alfabetoa = new ArrayList<>(sortuAlfabetoa().keySet());
-        StringBuilder emaitza = null;
-
+        String emaitza = null;
+        System.out.println(kriptograma.length()-1);
         for (int i = 0; i<=kriptograma.length()-1;i++) {
 
             char aux = kriptograma.charAt(i);
             if (Character.isWhitespace(aux)) {
                 assert emaitza != null;
-                emaitza.append(" ");
+                emaitza = emaitza + " ";
             } else {
-
                 int ans = kodeta.indexOf(aux);
-                if (i == 0){
-                    emaitza = new StringBuilder(alfabetoa.get(ans).toString());
+                if (i == 0) {
+                    emaitza = alfabetoa.get(ans).toString();
+                } else {
+                    emaitza = emaitza + alfabetoa.get(ans);
                 }
-                emaitza.append(alfabetoa.get(ans));
             }
         }
         System.out.println(emaitza);
         System.out.println("Kriptograma dekodetua modu egokian!!");
+        return emaitza;
     }
 }
