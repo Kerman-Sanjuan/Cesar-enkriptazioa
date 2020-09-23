@@ -65,6 +65,7 @@ public class Main {
                 }
             }
         }
+        System.out.println(kodeketa);
         System.out.println("Kodetu duzu!");
         assert kodeketa != null;
     }
@@ -145,8 +146,10 @@ public class Main {
                 int ans = kodeta.indexOf(aux);
                 if (i == 0){
                     emaitza = new StringBuilder(alfabetoa.get(ans).toString());
+                }else{
+                    emaitza.append(alfabetoa.get(ans));
                 }
-                emaitza.append(alfabetoa.get(ans));
+
             }
         }
         System.out.println(emaitza);
